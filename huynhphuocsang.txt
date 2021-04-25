@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 i am sang
+=======
+i am Sang
+>>>>>>> Sang
