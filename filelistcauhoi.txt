@@ -62,6 +62,22 @@ Am phan xa den cung luc voi am phat ra.
 Am phan xa truyen di moi huong, khong nhat thiet phai truyen den tai.
 Am phan xa nghe duoc cach biet voi am phat ra.
 D
+81017
+th
+RAM la gi trong may tinh?
+La bo nho xu ly ngau nhien, xu ly tac vu hien tai trong may tinh
+La bo nho dai han 
+Co ten goi khac la bo nho cache
+La bo nho phu khi bo nho chinh day
+A
+54804
+th
+ROM la bo nho gi trong may tinh?
+La bo nho truy cap ngau nhien trong may tinh
+La bo nho phu dung de chuyen doi giua nhung may tinh
+La bo nho di lien voi vi xu ly
+La bo nho chinh dung de luu tru du lieu lau dai
+D
 229583
 T
 Moi so tu nhien deu co:
@@ -86,6 +102,14 @@ So do tang them 30 don vi.
 So do tang them 300 don vi.
 So do tang them 3000 don vi.
 D
+178558
+T
+Mot thien nien ki co bao nhieu nam?
+10
+100
+1000
+10000
+C
 227784
 T
 Tap hop A la tap hop con cua tap hop B neu:
@@ -93,6 +117,14 @@ Tap hop A co it phan tu hon tap hop B.
 Tap hop B co nhieu phan tu hon tap hop A.
 Moi phan tu cua tap hop A deu la phan tu cua tap hop B.
 Tap hop A co nhieu phan tu hon tap hop B.
+C
+225214
+T
+Giai thua cua 6 la bao nhieu?
+320
+410
+720
+36
 C
 283942
 L
@@ -150,6 +182,22 @@ Hoa bai cu va soan bai moi.
 Bo hoc di choi dien tu.
 Nho ban giang bai kho.
 C
+329490
+T
+Nam 2021 thuoc the ki thu may? 
+XXI
+XXII
+XIX
+XVI
+A
+356463
+L
+Trong luc la gi
+Trong luc con co ten goi khac la luc ma sat
+Trong luc la luc hut cua trai dat co phuong thang dung va chieu tu tren xuong
+Trong luc la suc nang cua nuoc
+Trong luc la luc hut cua nam cham
+B
 370119
 L
 Nhung dac diem chung ve anh cua mot vat tao boi guong phang la:
@@ -174,6 +222,14 @@ cleaning
 clean
 cleaned
 A
+394738
+T
+1kg bang bao nhieu tan?
+0.1
+1000
+0.001
+100
+C
 469380
 T
 Cho 2 diem phan biet A va B, nhan xet nao sau day la dung:
@@ -230,14 +286,6 @@ A > B.
 A < B.
 Co so tu nhien Q sao cho A = B x Q.
 D
-645598
-GDCD
-Trach nhiem cua con nguoi doi voi thien nhien la gi ?
-Con nguoi can giu gin, bao ve thien nhien.
-Khai thac thien nhien
-Pha hoai thien nhien.
-Lam o nhiem moi truong thien nhien.
-A
 578274
 L
 Vat nao duoi day khong phai la nguon sang:
@@ -246,6 +294,22 @@ Mat trang.
 Ngon nen dang chay.
 Cuc than go dang nong do.
 B
+543580
+th
+ma bit gom co bao nhieu so?
+2 so gom 0 va 1
+3 so gom 0,1 va 2
+4 so gom 0,1,2 va 3
+chi bao gom so 0
+a
+645598
+GDCD
+Trach nhiem cua con nguoi doi voi thien nhien la gi ?
+Con nguoi can giu gin, bao ve thien nhien.
+Khai thac thien nhien
+Pha hoai thien nhien.
+Lam o nhiem moi truong thien nhien.
+A
 685863
 AV
 I often do my homework ___________ my bedroom.
@@ -294,6 +358,14 @@ an
 two
 is
 A
+733836
+th
+Man hinh may tinh dung de lam gi?
+Dung de danh may
+Dung de phat ra am thanh
+Dung de hien thi
+Dung de ket noi voi Internet
+C
 868196
 GDCD
 Y nao khong dung voi tu cham soc suc khoe?
@@ -301,6 +373,14 @@ An uong dieu do du chat dinh duong.
 Hang ngay luyen tap the duc the thao.
 Khong can cham soc suc khoe, bi benh di toi bac si uong thuoc se khoi.
 Phong benh hon chua benh.
+C
+830929
+T
+nam nay anh sang bao nhieu tuoi
+19
+20
+21
+22
 C
 947516
 GDCD
@@ -334,6 +414,14 @@ bathroom
 toilet
 living room
 D
+978294
+th
+Card do hoa trong may tinh dung de lam gi
+Dung de tang toc do cua vi xu ly
+Ho tro tang kha nang xu ly do hoa
+Thiet bi tang cuong am thanh
+Lam cho may tinh mat hon trong qua trinh xu dung
+B
 998890
 GDCD
 Tiet kiem the hien dieu gi o con nguoi?

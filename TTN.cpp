@@ -1,4 +1,3 @@
-//DEN DONG 2563
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,9 +42,9 @@ struct MONHOC
 	string TENMH;
 };
 struct LISTMONHOC
-{ //Mang con tro.
+{ 
 	int n;
-	MONHOC *nodes[MAX];
+	MONHOC nodes[MAX];
 };
 
 
@@ -104,7 +103,7 @@ struct LopHoc
 struct DsLop
 {
 	int n;
-	LopHoc lh[MAX];
+	LopHoc *lh[MAX];
 };
 
 
@@ -120,7 +119,7 @@ struct CAUHOI
 struct NODECH
 {
 	CAUHOI info;
-	int ID, bf;
+	int ID;
 	struct NODECH *left;
 	struct NODECH *right;
 };
@@ -258,7 +257,7 @@ LISTSV TimKiemSV_DSLOP(DsLop &dslop, string mmasv)
 	LISTSV p;
 	for (int i = 0 ;i < dslop.n; i++)
 	{
-		for (p = dslop.lh[i].FirstSV; p != NULL; p = p->pNext)
+		for (p = dslop.lh[i]->FirstSV; p != NULL; p = p->pNext)
 		{
 			if (p->sv.MSSV == mmasv)
 			{
@@ -275,7 +274,7 @@ int TimKiemLopCuaSV(DsLop &dslop, string mmasv)
 	LISTSV p;
 	for (int i = 0; i < dslop.n; i++)
 	{
-		for (p = dslop.lh[i].FirstSV; p != NULL; p = p->pNext)
+		for (p = dslop.lh[i]->FirstSV; p != NULL; p = p->pNext)
 		{
 			if (p->sv.MSSV == mmasv)
 			{
@@ -293,7 +292,7 @@ int KiemTraMaSV_School(DsLop &dslop, string masv)
 	LISTSV p;
 	for (int i = 0; i < dslop.n; i++)
 	{
-		for (p = dslop.lh[i].FirstSV; p != NULL; p = p->pNext)
+		for (p = dslop.lh[i]->FirstSV; p != NULL; p = p->pNext)
 		{
 			if (p->sv.MSSV == masv)
 			{
@@ -310,7 +309,7 @@ int TimKiemMaLop(DsLop dslop, string mmalop)
 {
 	for (int i = 0; i < dslop.n; i++)
 	{
-		if (dslop.lh[i].MaLop == mmalop) 
+		if (dslop.lh[i]->MaLop == mmalop) 
 		{
 			return i;
 	    }
@@ -464,7 +463,9 @@ void NhapLop(DsLop &dslop) //Tao 1 lop
 			}
 		}while (kiemTraChuoi(lh.TenLop) == 1);
 		lh.FirstSV = NULL;
-		dslop.lh[dslop.n++] = lh;
+		dslop.lh[dslop.n] =new LopHoc;
+		*dslop.lh[dslop.n] = lh;
+		dslop.n++; 
 		gotoxy(12, 25);
 		ShowCur(0);
 		cout << "Them lop thanh cong";
@@ -519,9 +520,9 @@ int XuatLop(DsLop dslop)
 	{
 		gotoxy(20, j);
 		SetColor(10);
-		cout << dslop.lh[i].MaLop;
+		cout << dslop.lh[i]->MaLop;
 		gotoxy(68, j);
-		cout << dslop.lh[i].TenLop;
+		cout << dslop.lh[i]->TenLop;
 		j++;
 	}
 	gotoxy(0, 22);
@@ -751,7 +752,7 @@ int NhapSV(DsLop &dsLop)
 		sv->gioitinh = gioitinh;
 		sv->password = password;
 		sv->FirstDiem = NULL;
-		Insert_Last(dsLop.lh[viTri].FirstSV, *sv);
+		Insert_Last(dsLop.lh[viTri]->FirstSV, *sv);
 		LuuFileDSLOP(dsLop);
 		gotoxy(0, 20);
 		ShowCur(0);
@@ -868,7 +869,7 @@ int XuatDSSV_OF_LOP(DsLop dslop)
 		{
 			ShowCur(0);
 			j = 7;
-			for (p = dslop.lh[viTri].FirstSV; p != NULL; p = p->pNext)
+			for (p = dslop.lh[viTri]->FirstSV; p != NULL; p = p->pNext)
 			{
 				gotoxy(7, j);
 				cout << p->sv.MSSV << endl;
@@ -931,7 +932,7 @@ bool kiemTraMAMH(string mamh, LISTMONHOC plist, int j)
 { 
 	for (int i = 0; i < j; i++)
 	{ //Bien j la so phan tu da dung
-		if (mamh == plist.nodes[i]->MAMH)
+		if (mamh == plist.nodes[i].MAMH)
 		{
 			return false;
 		}
@@ -943,7 +944,7 @@ int kiemTraMAMH(string mamh, LISTMONHOC plist)
 { //Kiem tra, neu ma mon hoc da ton tai tra ve vi tri, khong thi tra ve -1
 	for (int i = 0; i < plist.n; i++)
 	{
-		if (mamh == plist.nodes[i]->MAMH)
+		if (mamh == plist.nodes[i].MAMH)
 		{
 			return i;
 		}
@@ -1022,8 +1023,7 @@ string themMONHOC(MONHOC temp, LISTMONHOC &plist)
 		gotoxy(0, 15);
 		return "MAMH nay da bi trung. Khong them duoc.\n";
 	}
-	plist.nodes[plist.n] = new MONHOC; //Khoi tao vung nho cho con tro
-	*plist.nodes[plist.n] = temp; //Them mon hoc vao vung nho cua con tro, sau khi them vao thi tang so luong phan tu cua danh sach len 1
+	plist.nodes[plist.n] = temp; //Khoi tao vung nho cho con tro
 	plist.n += 1;
 	gotoxy(0, 18);
 	return "Them mon hoc thanh cong.\n";
@@ -1134,9 +1134,9 @@ void xuatLISTMONHOC(LISTMONHOC plist)
 	{
 		gotoxy(17, k);
 		SetColor(15);
-		cout << plist.nodes[i]->MAMH << endl;
+		cout << plist.nodes[i].MAMH << endl;
 		gotoxy(45, k);
-		cout << plist.nodes[i]->TENMH << endl;
+		cout << plist.nodes[i].TENMH << endl;
 		k++;
 	}	
 	j = getch();
@@ -1156,8 +1156,8 @@ int writefileLISTMONHOC(LISTMONHOC plist)
 	fo << plist.n << "\n";
 	for (int i = 0; i < plist.n; i++)
 	{			  
-    	fo << plist.nodes[i]->MAMH << "\n";
-    	fo << plist.nodes[i]->TENMH <<"\n";
+    	fo << plist.nodes[i].MAMH << "\n";
+    	fo << plist.nodes[i].TENMH <<"\n";
 	}
     fo.close();
 	return 0;
@@ -1241,9 +1241,9 @@ int Sua_MonHoc(LISTMONHOC &dsmh)
 		{
 			gotoxy(22, 5);
 			ShowCur(0);
-			cout << dsmh.nodes[viTri]->MAMH;
+			cout << dsmh.nodes[viTri].MAMH;
 			gotoxy(23, 7);
-			cout << dsmh.nodes[viTri]->TENMH;
+			cout << dsmh.nodes[viTri].TENMH;
 			break;
 		}
 	}
@@ -1279,7 +1279,7 @@ int Sua_MonHoc(LISTMONHOC &dsmh)
 		ShowCur(1);
 		getline(cin, mamonhocmoi);
 	}
-	dsmh.nodes[viTri]->MAMH = mamonhocmoi;
+	dsmh.nodes[viTri].MAMH = mamonhocmoi;
 	gotoxy(55, 7);
 	ShowCur(1);
 	getline(cin, tenmonhocmoi);
@@ -1295,7 +1295,7 @@ int Sua_MonHoc(LISTMONHOC &dsmh)
 		ShowCur(1);
 		getline(cin, tenmonhocmoi);
 	}
-	dsmh.nodes[viTri]->TENMH = tenmonhocmoi;
+	dsmh.nodes[viTri].TENMH = tenmonhocmoi;
 	gotoxy(0, 20);
 	cout << "Doi thong tin thanh cong";
 	Sleep(1500);
@@ -1352,7 +1352,7 @@ int XoaMonHoc(LISTMONHOC &dsmh)
 		{
 			gotoxy(28, 7);
 			SetColor(15);
-		    cout << dsmh.nodes[i]->TENMH;
+		    cout << dsmh.nodes[i].TENMH;
 			gotoxy(0, 20);
 			ShowCur(0);
 			SetColor(15);
@@ -1360,7 +1360,7 @@ int XoaMonHoc(LISTMONHOC &dsmh)
 			int a = getch();
 			if (a == 121)
 			{
-				delete dsmh.nodes[i];
+				
 				for (int j = i + 1; j < dsmh.n; j++)
 				{
 					dsmh.nodes[j - 1] = dsmh.nodes[j];
@@ -1535,203 +1535,41 @@ bool isEmpty(TREECH root)
 	return(root == NULL);
 }
 
-	
- 
-//Quay phai
-void rotateLL (TREECH &T)
-{
-    NODECH *T1 = T->left;
-    T->left = T1->right;
-    T1->right = T;
-    switch (T1->bf) //T1 ban dau khi chua xoay. Cap nhat lai chi so can bang
-    { 
-        case LH:
-			T->bf = EH;
-            T1->bf = EH;
-            break;
-        case EH:
-			T->bf = LH;
-            T1->bf = RH;
-            break;
-    } 
-    T = T1;
-}
 
-//Quay trai
-void rotateRR(TREECH &T)
+bool Insert(TREECH &T, int X, CAUHOI ch)
 {
-    NODECH *T1 = T->right;
-    T->right = T1->left;
-    T1->left = T;
-    switch (T1->bf)
-    {
-        case RH:
-			T->bf = EH;
-            T1->bf = EH;
-            break;
-        case EH: 
-			T->bf = RH;
-            T1->bf = LH;
-            break;
-    } 
-    T = T1;
-}
-
-//Quay kep Left - Right
-void rotateLR(TREECH &T)
-{
-    NODECH *T1 = T->left;
-    NODECH *T2 = T1->right;
-    T->left = T2->right;
-    T2->right = T;
-    T1->right = T2->left;
-    T2->left = T1;
-    switch (T2->bf)
-    { 
-        case LH:
-			T->bf = RH;
-            T1->bf = EH;
-            break;
-        case EH:
-			T->bf = EH;
-            T1->bf = EH;
-            break;
-        case RH:
-			T->bf = EH;
-            T1->bf = LH;
-            break;
-    }
-    T2->bf = EH;
-    T = T2;
-}
-
-//Quay kep Right - Left
-void rotateRL (TREECH &T)
-{ 
-    NODECH *T1 = T->right;
-    NODECH *T2 = T1->left;
-    T->right = T2->left;
-    T2->left = T;
-    T1->left = T2->right;
-    T2->right = T1;
-    switch (T2->bf)
-    { 
-        case RH:
-			T->bf = LH;
-            T1->bf = EH;
-            break;
-        case EH:
-			T->bf = EH;
-            T1->bf = EH;
-            break;
-        case LH:
-			T->bf = EH;
-            T1->bf = RH;
-            break;
-    } 
-    T2->bf = EH;
-    T = T2;
-}
-
-//Can bang khi cay bi lech ve ben trai
-void balanceLeft(TREECH &T)
-{
-    switch (T->left->bf)
-    {
-        case LH:
-			rotateLL(T);
-			break;
-        case EH:
-			rotateLL(T);
-			break;
-        case RH:
-			rotateLR(T);
-    }
-}
-
-//Can bang khi cay bi lech ve ben phai
-void balanceRight(TREECH &T)
-{
-    switch (T->right->bf)
-    {
-        case LH:
-			rotateRL(T);
-			break;
-        case EH:
-			rotateRR(T);
-			break;
-        case RH:
-			rotateRR(T);
-    }
-}
-
-int Insert(TREECH &T, int X, CAUHOI ch)
-{
-    int res;
     if (T != NULL)
-    {
-        if (T->ID == X)
+    { 
+    	
+         if (T->ID > X)
         {
-        	return 0;
+             Insert(T->left, X, ch);
+        }
+        else if (T->ID < X)
+        {
+            Insert(T->right, X, ch);
+            
+        }
+        else if(T->ID==X){
+        	return false; 
 		}
-        else if (T->ID > X)
-        {
-            res = Insert(T->left, X, ch);
-            if (res < 2)
-            {
-            	return res;
-			}
-            switch (T->bf)
-            {
-                case RH:
-					T->bf = EH;
-                    return 1;
-            	case EH:
-					T->bf = LH;
-                	return 2;
-            	case LH:
-					balanceLeft(T);
-                	return 1;
-            }
-        }
-        else //if (T->key < X)
-        {
-            res = Insert(T->right, X, ch);
-            if (res < 2)
-            {
-            	return res;
-			}
-            switch (T->bf)
-            {
-                case LH:
-					T->bf = EH;
-                    return 1;
-                case EH:
-					T->bf = RH;
-                    return 2;
-                case RH:
-					balanceRight(T);
-                    return 1;
-            }
-        }
     }
     //T == NULL
-    T = new NODECH;
-    if (T == NULL)
-    {
-    	return -1; //Thieu bo nho
+    else{
+		    NODECH*q = new NODECH;
+		    q->ID = X;
+		    q->info.MAMH = ch.MAMH;
+			q->info.NOIDUNG = ch.NOIDUNG;
+			q->info.CAUA = ch.CAUA;
+		    q->info.CAUB = ch.CAUB;
+		    q->info.CAUC = ch.CAUC;
+		    q->info.CAUD = ch.CAUD;
+		    q->info.DAPAN = ch.DAPAN;
+		    q->left  = NULL;
+		    q->right = NULL; 
+		    T=q; 
+		    return true; 
 	}
-    T->ID = X;
-    T->bf = EH;
-    T->info.MAMH = ch.MAMH;
-	T->info.NOIDUNG = ch.NOIDUNG;
-	T->info.CAUA = ch.CAUA;
-    T->info.CAUB = ch.CAUB;
-    T->info.CAUC = ch.CAUC;
-    T->info.CAUD = ch.CAUD;
-    T->info.DAPAN = ch.DAPAN;
-    T->left = T->right = NULL;
-    return 2;
 }
 
 //ham tra ve so cau hoi theo ma mon hoc thong qua &i
@@ -1930,17 +1768,15 @@ void nhapLISTCAUHOI(TREECH &p , LISTMONHOC lmh)
 				}
 				else
 				{
-					int j = Insert(p, id, ch);
-					if (j == 2 || j == 1)
-					{
+					bool ketqua = Insert(p, id, ch);
+					if(ketqua==true){
 						ShowCur(0);
 						cout << "Them cau hoi thanh cong.\n";
-					}
-					else
-					{
+					}else{
 						ShowCur(0);
 						cout << "Them cau hoi that bai.\n";
 					}
+						
 				}
 			}while (x == 1);
 			SetColor(12);
@@ -2128,9 +1964,9 @@ int LuuFileDSLOP(DsLop &dsLop)
 	of << dsLop.n << endl;
 	for (int i = 0; i < dsLop.n; i++)
 	{
-		of << dsLop.lh[i].MaLop << endl;
-		of << dsLop.lh[i].TenLop << endl;
-		LISTSV p = dsLop.lh[i].FirstSV;
+		of << dsLop.lh[i]->MaLop << endl;
+		of << dsLop.lh[i]->TenLop << endl;
+		LISTSV p = dsLop.lh[i]->FirstSV;
 	
 		while (p != NULL)
 		{
@@ -2162,13 +1998,14 @@ void DocFileDSLOP(DsLop &dslop)
 		cout << "Khong the doc file!!";
 		return;
 	}
-	fi >> dslop.n;
+	fi >> dslop.n; 
 	fi.ignore();
 	for (int i = 0; i < dslop.n; i++)
 	{
-		getline(fi, dslop.lh[i].MaLop);
-		getline(fi, dslop.lh[i].TenLop);
-		dslop.lh[i].FirstSV = NULL;
+		dslop.lh[i] = new LopHoc; 
+		getline(fi, dslop.lh[i]->MaLop);
+		getline(fi, dslop.lh[i]->TenLop);
+		dslop.lh[i]->FirstSV = NULL;
 		Sv *sv = new Sv; //Cap phat vung nho cho 1 sinh vien
 		getline(fi, sv->MSSV);
 		while (sv->MSSV.length() != 0)
@@ -2188,7 +2025,7 @@ void DocFileDSLOP(DsLop &dslop)
 				diem = new Diemthi;
 				getline(fi, diem->MAMH);
 			}
-			Insert_Last(dslop.lh[i].FirstSV, *sv);
+			Insert_Last(dslop.lh[i]->FirstSV, *sv);
 			sv = new Sv;
 			getline(fi, sv->MSSV);
 		}
@@ -2806,7 +2643,7 @@ void XuatDSDiem_Lop(DsLop dslop, LISTMONHOC plist)
 		}
 	}while (viTrim == -1);
 	line = 7;
-	LISTSV lsv = dslop.lh[viTril].FirstSV;
+	LISTSV lsv = dslop.lh[viTril]->FirstSV;
 	while (lsv != NULL)
 	{
 		ShowCur(0);
@@ -3036,14 +2873,14 @@ LISTSV xuLiDangNhap(DsLop dsLop, int &i, Sv* &sv)
 	{
 		for (int j = 0; j < dsLop.n; j++)
 		{
-			LISTSV p = dsLop.lh[j].FirstSV;
+			LISTSV p = dsLop.lh[j]->FirstSV;
 			while (p != NULL)
 			{
 				if (p->sv.MSSV == username && p->sv.password == password)
 				{
 					i = 0;
 					sv = &p->sv;
-					return dsLop.lh[j].FirstSV;
+					return dsLop.lh[j]->FirstSV;
 				}
 				p = p->pNext;
 			}
@@ -3073,26 +2910,24 @@ void GiaiPhongCay(TREECH &root)
 
 void GiaiPhong(LISTMONHOC &lmh, DsLop &dslop, TREECH &cauhoi)
 {
-	for (int i = 0; i < lmh.n; i++)
-	{
-		delete lmh.nodes[i];
-	}
+	
 	for (int i = 0; i < dslop.n; i++)
 	{
-		LISTSV h = dslop.lh[i].FirstSV;
-		while (dslop.lh[i].FirstSV != NULL)
+		LISTSV h = dslop.lh[i]->FirstSV;
+		while (dslop.lh[i]->FirstSV != NULL)
 		{
-			Listdiemthi k = dslop.lh[i].FirstSV->sv.FirstDiem;
-			while (dslop.lh[i].FirstSV->sv.FirstDiem != NULL)
+			Listdiemthi k = dslop.lh[i]->FirstSV->sv.FirstDiem;
+			while (dslop.lh[i]->FirstSV->sv.FirstDiem != NULL)
 			{
-				dslop.lh[i].FirstSV->sv.FirstDiem = dslop.lh[i].FirstSV->sv.FirstDiem->pNext;
+				dslop.lh[i]->FirstSV->sv.FirstDiem = dslop.lh[i]->FirstSV->sv.FirstDiem->pNext;
 				delete k;
-				k = dslop.lh[i].FirstSV->sv.FirstDiem;
+				k = dslop.lh[i]->FirstSV->sv.FirstDiem;
 			}
-			dslop.lh[i].FirstSV = dslop.lh[i].FirstSV->pNext;
+			dslop.lh[i]->FirstSV = dslop.lh[i]->FirstSV->pNext;
 			delete h;
-			h = dslop.lh[i].FirstSV;
+			h = dslop.lh[i]->FirstSV;
 		}
+		delete dslop.lh[i]; 
 	}
 	GiaiPhongCay(cauhoi);
 }
@@ -3100,7 +2935,7 @@ int main()
 {
 	Sv* sinhvien;
 	DsLop dslop;
-	dslop.n = 0;
+	createLOP(dslop); 
 	LISTMONHOC lmh;
 	create(lmh);
 	readfileLISTMONHOC(lmh);
