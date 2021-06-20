@@ -30,11 +30,7 @@
 #define INSERT 82
 #define END 79
 
-#define LH -1 //Cay con trai cao hon.
-#define EH 0 //Hai cay con bang nhau.
-#define RH 1 //Cay con phai cao hon.
-using namespace std;
-
+using namespace std; 
 //Danh sach mon hoc.
 struct MONHOC
 {
@@ -46,7 +42,6 @@ struct LISTMONHOC
 	int n;
 	MONHOC nodes[MAX];
 };
-
 
 //KHAI BAO DIEM THI
 //Danh sach cac cau hoi sinh vien da thi
@@ -69,7 +64,7 @@ struct NodeDiem
 	Diemthi DataDiem;
 	NodeDiem *pNext;
 };
-typedef struct NodeDiem* Listdiemthi;
+typedef struct NodeDiem* Listdiemthi; 
 
 
 //KHAI BAO SINH VIEN: 
@@ -125,6 +120,7 @@ struct NODECH
 };
 typedef struct NODECH *TREECH;
 
+//HUY
 void resizeConsole(int width, int height)
 {
 	HWND console = GetConsoleWindow();
@@ -132,6 +128,7 @@ void resizeConsole(int width, int height)
 	GetWindowRect(console, &r);
 	MoveWindow(console, r.left, r.top, width, height, TRUE);
 }
+//HUY
 void ShowCur(bool CursorVisibility)
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -140,6 +137,7 @@ void ShowCur(bool CursorVisibility)
 }
 
 //In ra ky tu hoa va so
+//HUY
 string ChuanHoaNhap1()
 {
 	string s = "";
@@ -147,7 +145,7 @@ string ChuanHoaNhap1()
 	do
 	{
 		c = _getch();
-		if (c == 27) //Esc
+		if (c == ESC ) //Esc
 		{
 			return "\0";
 		}
@@ -168,7 +166,7 @@ string ChuanHoaNhap1()
 				s.replace(s.length() - 1, 1, "");
 			}
 		}
-	}while (c != 13); //Chuyen dong, xuong dong
+	}while (c != Enter); //Chuyen dong, xuong dong
 	return s;
 }
 //kiem tra co phai la chuoi chinh xac hay khong? 
@@ -214,16 +212,16 @@ string ChuanHoaPass(string &s, int x, int y)
 	do
 	{
 		c = _getch();
-		if (c == 27)
+		if (c == ESC)
 		{
 			return "\0"; //NULL
 		}
 		if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9')
 		{
-			cout << "*";
+			cout << "*"; 
 			s += c;
 		}
-		else if (c == 8)
+		else if (c == BACKSPACE)
 		{
 			if (s.length() > 0)
 			{
@@ -239,8 +237,9 @@ string ChuanHoaPass(string &s, int x, int y)
 //nhap vao ma sinh vien theo danh sach sinh vien->tra ve sinh vien theo ma do, neu khong co tra ve NULL 
 //ham nay bi ben duoi dung lai 
 //nen xem xet xoa
-LISTSV TimKiemSV_DSSV(LISTSV &First, string MaSV)
+LISTSV TimKiemSV_DSSV(LISTSV &First, string MaSV) //<kieu du lieu> <ten bien>
 {
+	
 	for (LISTSV p = First; p != NULL; p = p->pNext)
 	{
 		if (p->sv.MSSV == MaSV)
@@ -322,6 +321,8 @@ void Insert_Last(LISTSV &First, Sv sv)
 {
 	LISTSV p = new DSSV;
 	p->sv = sv; p->pNext = NULL;
+	
+	
 	if (First == NULL)
 	{
 		First = p;
@@ -329,12 +330,15 @@ void Insert_Last(LISTSV &First, Sv sv)
 	else
 	{
 		LISTSV Last ;
+		
 		for (Last = First; Last->pNext != NULL; Last = Last->pNext);
+		
 		Last->pNext = p;
 	}
 }
 
 ////////////////LOP HOC////////////////
+//HUY
 void designNhapLop()
 {
 	gotoxy(1, 5);
@@ -385,16 +389,22 @@ void designNhapLop()
 	cout << "MA LOP";
 }
 
-//kiem tra so luong lop co bi rong hay khong?
-bool isEmpty(DsLop dslop)
-{
-	return (dslop.n == 0);
-}
+
 
 void createLOP(DsLop &dslop)
 {
 	dslop.n = 0;
 }
+//kiem tra so luong lop co bi rong hay khong?
+bool isEmpty(DsLop dslop)
+{
+	if(dslop.n==0){
+		return true; 
+	}
+	return false; 
+}
+
+
 
 //nhap vao danh sach lop 
 void NhapLop(DsLop &dslop) //Tao 1 lop
@@ -462,9 +472,13 @@ void NhapLop(DsLop &dslop) //Tao 1 lop
 				getline(cin, lh.TenLop);
 			}
 		}while (kiemTraChuoi(lh.TenLop) == 1);
+		
+		
 		lh.FirstSV = NULL;
+		
 		dslop.lh[dslop.n] =new LopHoc;
 		*dslop.lh[dslop.n] = lh;
+		
 		dslop.n++; 
 		gotoxy(12, 25);
 		ShowCur(0);
@@ -579,6 +593,7 @@ void designNhapSV()
 int LuuFileDSLOP(DsLop &dsLop); //Khai bao
 
 void DocFileDSLOP(DsLop& dslop);
+
 
 
 
@@ -746,12 +761,15 @@ int NhapSV(DsLop &dsLop)
 			}
 		}while (kiemTraChuoi(password) == 1);
 		Sv *sv = new Sv;
+	
 		sv->MSSV = mssv;
 		sv->ho = ho;
 		sv->ten = ten;
 		sv->gioitinh = gioitinh;
 		sv->password = password;
 		sv->FirstDiem = NULL;
+		
+		
 		Insert_Last(dsLop.lh[viTri]->FirstSV, *sv);
 		LuuFileDSLOP(dsLop);
 		gotoxy(0, 20);
@@ -838,7 +856,7 @@ int XuatDSSV_OF_LOP(DsLop dslop)
 		ShowCur(1);
 		getline(cin, malop);
 		SetColor(15);
-		viTri = TimKiemMaLop(dslop, malop);
+		
 		if (kiemTraChuoi(malop) == 1)
 		{
 			gotoxy(0, 30);
@@ -855,7 +873,8 @@ int XuatDSSV_OF_LOP(DsLop dslop)
 				ShowCur(0);
 				cout << "                         ";
 			}
-		}
+		}else{
+			viTri = TimKiemMaLop(dslop, malop);
 		if (viTri == -1)
 		{
 			gotoxy(0, 30);
@@ -884,7 +903,9 @@ int XuatDSSV_OF_LOP(DsLop dslop)
 				j++;
 			}
 		}
-	}while (TimKiemMaLop(dslop,malop) == -1);
+		}
+		
+	}while (kiemTraChuoi(malop) == 1 || TimKiemMaLop(dslop,malop) == -1);
 	b = getch();
 	if (b == ENTER)
 	{
@@ -897,8 +918,10 @@ int XuatDSSV_OF_LOP(DsLop dslop)
 void Insert_LastDiem(Listdiemthi &First, Diemthi dt)
 {
 	Listdiemthi p = new NodeDiem;
+	
 	p->DataDiem = dt;
 	p->pNext = NULL;
+	
 	if (First == NULL)
 	{
 		First = p;
@@ -914,12 +937,21 @@ void Insert_LastDiem(Listdiemthi &First, Diemthi dt)
 ////////////MON HOC////////////
 bool isEmpty(LISTMONHOC plist)
 {
-	return(plist.n == 0);
+	if(plist.n==0){
+		return true;
+	}
+	
+		return false; 
+	
+	
 }
 
 bool isFull(LISTMONHOC plist)
 {
-	return(plist.n == MAX);
+	if(plist.n==100){
+		return true; 
+	}
+	return false; 
 }
 
 void create(LISTMONHOC & plist)
@@ -953,6 +985,7 @@ int kiemTraMAMH(string mamh, LISTMONHOC plist)
 }
 
 //HUY
+//thieu kiem tra ma mon hoc co bi trung hay ko? 
 int nhapMONHOC(MONHOC &mh)
 {
 	int a;
@@ -980,7 +1013,9 @@ int nhapMONHOC(MONHOC &mh)
 				ShowCur(0);
 				cout << "                                           ";
 			}
+			
 		}
+		
 	}while (kiemTraChuoi(mh.MAMH) == 1);
 	do
 	{

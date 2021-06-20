@@ -1,7 +1,9 @@
 
 ===============================PHẦN DỮ LIỆU===================================
-hàm create() có vấn đề
-xem lại khai báo dữ liệu 
+hàm create() có vấn đề 		xong
+xem lại khai báo dữ liệu  xong 
+hàm goto trong hàm:'void NhapLop(DsLop &dslop) ' dòng 400
+
 
 =============================PHẦN GIAO DIỆN=========================
 nhập câu hỏi thi: nhập mã môn học nên hiện ra thêm tên môn học
