@@ -1174,6 +1174,7 @@ void xuatLISTMONHOC(LISTMONHOC plist)
 		cout << plist.nodes[i].TENMH << endl;
 		k++;
 	}	
+	
 	j = getch();
 	if (j == ENTER)
 	{
@@ -1226,10 +1227,10 @@ void designSuaMonHoc()
 {
 	gotoxy(20, 1);
 	cout << "SUA THONG TIN MON HOC";
-	gotoxy(65, 25);
-	SetBGColor(0);
-	SetColor(4);
-	cout << "Enter o Ma Mon Hoc Moi de thoat";
+//	gotoxy(65, 25);
+//	SetBGColor(0);
+//	SetColor(4);
+//	cout << "Enter o Ma Mon Hoc Moi de thoat";
 	gotoxy(7, 3);
 	SetColor(3);
 	cout << "THONG TIN HIEN TAI";
@@ -1263,7 +1264,7 @@ int Sua_MonHoc(LISTMONHOC &dsmh)
 		ShowCur(1);
 		getline(cin, mamonhoc);
 		viTri = kiemTraMAMH(mamonhoc, dsmh);
-		if (viTri < 0)//==-1
+		if (viTri == -1)//==-1
 		{
 			gotoxy(0, 20);
 			ShowCur(0);
@@ -1295,10 +1296,7 @@ int Sua_MonHoc(LISTMONHOC &dsmh)
 		{
 			return 2;
 		}
-		else
-		{
-			continue;
-		}
+		
 	}
 	while (kiemTraMAMH(mamonhocmoi, dsmh) >= 0)
 	{
@@ -1558,16 +1556,17 @@ void xuatCAUHOI(CAUHOI ch)
 	cout <<	"Dap an: " << ch.DAPAN << endl;
 }
 
-//ham khoi tao cay
+
 void Init(TREECH & root)
 {
 	root = NULL;
 }
 
-//ham kiem tra cay co bi rong khong
+
 bool isEmpty(TREECH root)
 {
-	return(root == NULL);
+	if(root==NULL) return true; 
+	return false; 
 }
 
 
@@ -1703,14 +1702,14 @@ TREECH searchCAUHOIbyID(TREECH T, int x)
 		{
 			p = p->left;
 		}
-		else
+		else if(x>p->ID)
 		{
 			p = p->right;
 		}
 	}
 	return(p); //Neu p tra ve NULL: tuc la trong cay chua ton tai id x, them vao cay; neu khac NULL la trong cay da ton tai roi, phai ramdom lai
 }
-
+//tao ra so ngau nhien
 int RANDOM()
 {
     int m;
@@ -2073,7 +2072,7 @@ void InThoiGian(int tg)
 { //Ham hien thi thoi gian, thoi gian la so giay
 	gotoxy(10, 1);
 	ShowCur(0);
-	cout << "TG: " << setw(2) << setfill('0') << tg/60 //In so phut
+	cout << "TG: " <<setw(2)<< setfill('0') << tg/60 //In so phut
 		<< ":" << setw(2) << setfill('0') << tg%60; //In so giay
 }
 //HUY
@@ -2155,8 +2154,6 @@ int Select()
 		ShowCur(0);
 		c = _getch();
 		normal();
-		gotoxy(26, (5 + select*2));
-		cout << "  ";
 		gotoxy(30, (5 + select*2));
 		cout << menu_GV[select];
 		switch (c)
@@ -2202,11 +2199,11 @@ float chamDIEM(TREECH lch, DETHI dt, char* dapan)
 	for (int i = 0; i < dt.n; i++)
 	{
 		NODECH *q = searchCAUHOIbyID(lch, dt.nodes[i]);
-		if (dapan[i] < 123 && dapan[i] > 96) //Chuan hoa cac dap an ma co chu in thuong thanh in hoa
+		if (dapan[i] > 96 && dapan[i] < 123 ) //Chuan hoa cac dap an ma co chu in thuong thanh in hoa
 		{
 			dapan[i] -= 32;
 		}
-		if (q->info.DAPAN < 123 && q->info.DAPAN > 96) //Chuan hoa cac dap an ma co chu in thuong thanh in hoa
+		if (q->info.DAPAN > 96 && q->info.DAPAN < 123 ) //Chuan hoa cac dap an ma co chu in thuong thanh in hoa
 		{
 			q->info.DAPAN -= 32;
 		}
@@ -2241,6 +2238,7 @@ void InCauTraLoi(CAUHOI ch, int i, bool highlight)
 		case 3:
 			ctl = ch.CAUD;
 	}
+
 	ctl.insert(0, string(1, char(i + 65)) + ". "); //Them "A." (hoac "B.",...) truoc cau tra loi
 	int padding = 80 - ctl.length() % 80; //padding luu so khoang trong can them de cho du 1 hang
 	if (highlight)

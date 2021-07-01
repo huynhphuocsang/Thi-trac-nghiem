@@ -230,6 +230,14 @@ T
 0.001
 100
 C
+417342
+T
+1+2 bang may vay ha Tuyen?
+2
+3
+4
+7
+b
 469380
 T
 Cho 2 diem phan biet A va B, nhan xet nao sau day la dung:
