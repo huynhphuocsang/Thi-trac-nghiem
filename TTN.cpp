@@ -251,7 +251,7 @@ LISTSV TimKiemSV_DSSV(LISTSV &First, string MaSV) //<kieu du lieu> <ten bien>
 }
 
 //nhap vao mssv theo tung lop, neu co tra ve sinh vien, neu khong co tra ve NULL  
-LISTSV TimKiemSV_DSLOP(DsLop &dslop, string mmasv)
+LISTSV TimKiemSV_DSLOP(DsLop dslop, string mmasv)
 {
 	LISTSV p;
 	for (int i = 0 ;i < dslop.n; i++)
@@ -268,7 +268,7 @@ LISTSV TimKiemSV_DSLOP(DsLop &dslop, string mmasv)
 }
 
 //nhap vao mssv, tra ve lop cua sinh vien
-int TimKiemLopCuaSV(DsLop &dslop, string mmasv)
+int TimKiemLopCuaSV(DsLop dslop, string mmasv)
 {
 	LISTSV p;
 	for (int i = 0; i < dslop.n; i++)
@@ -2394,7 +2394,7 @@ void thiTRACNGHIEM(TREECH lch, LISTMONHOC lmh, LISTSV sv , Sv *sinhvien)
 			{
 				gotoxy(0, 20);
 				ShowCur(0);
-				cout << "So cau hoi khong hop le (0 < x <= "<< "i"<<"). Moi ban nhap lai.";
+				cout << "So cau hoi khong hop le (0 < x <= "<< i<<"). Moi ban nhap lai.";
 				Sleep(1500);
 				gotoxy(28, 4);
 				cout << "																 ";
@@ -2438,7 +2438,7 @@ void thiTRACNGHIEM(TREECH lch, LISTMONHOC lmh, LISTSV sv , Sv *sinhvien)
 					switch (da)
 					{
 						//HUY
-						case 13:
+						case ENTER:
 						{ //Nhan enter 
 							dapan[cauthu] = char(luachon + 65); //Ghi nhan vao dap an
 							gotoxy(0, 19);
@@ -2486,7 +2486,7 @@ void thiTRACNGHIEM(TREECH lch, LISTMONHOC lmh, LISTSV sv , Sv *sinhvien)
 								}
 								time(&hiengio); //Lay gio hien tai
 								ShowCur(0);
-								InThoiGian(thoigian - hiengio + batdau); //In ra thoi gian
+								InThoiGian(thoigian - (hiengio - batdau)); //In ra thoi gian
 							}while (da != 'n' && da != 'N' && thoigian >= (hiengio - batdau));
 							GiaoDienThi(ch->info, mamh, soch, cauthu, dapan, luachon);
 							break;
@@ -2558,7 +2558,7 @@ void thiTRACNGHIEM(TREECH lch, LISTMONHOC lmh, LISTSV sv , Sv *sinhvien)
 				}
 				time(&hiengio); //Lay gio hien tai
 				ShowCur(0);
-				InThoiGian(thoigian - hiengio + batdau); //In ra thoi gian
+				InThoiGian(thoigian - (hiengio - batdau)); //In ra thoi gian
 			}while (da != 'n' && da != 'N' && thoigian >= (hiengio - batdau)); 
 			//Het gio thi hoac nguoi ta da nhan vao nop bai.
 			system("cls");
@@ -2703,7 +2703,7 @@ void XuatDSDiem_Lop(DsLop dslop, LISTMONHOC plist)
 				}
 				ldt = ldt->pNext;
 			}
-			if (!thiRoi)
+			if (thiRoi==false)
 			{
 				gotoxy(83, line);
 				ShowCur(0);
@@ -2941,7 +2941,7 @@ void GiaiPhongCay(TREECH &root)
 	}
 }
 
-void GiaiPhong(LISTMONHOC &lmh, DsLop &dslop, TREECH &cauhoi)
+void GiaiPhong(DsLop &dslop, TREECH &cauhoi)
 {
 	
 	for (int i = 0; i < dslop.n; i++)
@@ -3001,6 +3001,6 @@ int main()
 			}
 		}
 	}while (1);
-	GiaiPhong(lmh, dslop, lch);
+	GiaiPhong(dslop, lch);
 	return 0;
 }
