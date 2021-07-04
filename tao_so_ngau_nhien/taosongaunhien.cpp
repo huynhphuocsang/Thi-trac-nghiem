@@ -41,9 +41,10 @@ void xuatfile(int a[],int n){
 	return; 
 }
 int main(){
-	int a[2000];
-	int n=2000;
-	for(int i=0;i<2000;i++){
+	int n=10000;
+	int a[n];
+
+	for(int i=0;i<n;i++){
 		a[i]=i; 
 	}
 	XaoTronMang(a,n);

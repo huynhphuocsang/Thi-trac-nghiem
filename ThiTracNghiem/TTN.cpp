@@ -1714,7 +1714,7 @@ int RANDOM()
 {
     int m;
 	int n;
-	int A[2000];
+	int A[10000];
 	ifstream filein;
 	filein.open("so_ngau_nhien.txt", ios_base::in);
 	filein >> n;
