@@ -1802,6 +1802,7 @@ void nhapLISTCAUHOI(TREECH &p , LISTMONHOC lmh)
 				}
 				else
 				{
+					ch.id = id; 
 					bool ketqua = Insert(p, id, ch);
 					if(ketqua==true){
 						ShowCur(0);
@@ -1856,6 +1857,7 @@ int writefileLISTCAUHOI(TREECH p)
 	ofstream fo("filelistcauhoi.txt", ios::out); //ios::app: ghi tiep tuc vao file, chu khong phai xoa het file roi ghi lai tu dau. 
 	if (!fo)
 	{
+		cout<<"Ghi file bi loi"<<endl;
 		return -1;
 	}
 	writefileLISTCAUHOI(p, fo);
@@ -2099,8 +2101,7 @@ char menu_GV[16][100] =   {   "1. THEM LOP MOI                      ",
 						      "9. NHAP CAU HOI THI                  ",
 						      "10. IN DANH SACH CAU HOI             ",
 						      "11. THI TRAC NGHIEM                  ",
-						      "12. IN CAC CAU HOI DA THI CUA SV     ",
-						      "13. IN BANG DIEM CUA LOP THEO MON HOC",	
+						      "12. IN BANG DIEM CUA LOP THEO MON HOC",	
 };
 //HUY
 int Select()
@@ -2141,7 +2142,7 @@ int Select()
 	cout << "CHUC NANG CUA GIAO VIEN";
 	gotoxy(30, 2);
 	normal();
-	for (int i = 0; i < 13; i++)
+	for (int i = 0; i < 12; i++)
 	{
 		gotoxy(30, 5 + i*2);
 		cout << menu_GV[i];
@@ -2163,14 +2164,14 @@ int Select()
 				select -= 1;
 				if (select < 0)
 				{
-					select = 12;
+					select = 11;
 				}
 				break;
 			}
 			case DOWN:
 			{
 				select += 1;
-				if (select > 12)
+				if (select > 11)
 				{
 					select = 0;
 				}
@@ -2825,13 +2826,13 @@ void xuLiMenuGV(DsLop &dslop, LISTMONHOC &lmh, TREECH &lch)
 			}
 			case 12:
 			{
+				system("cls");
+				XuatDSDiem_Lop(dslop,lmh);
+				goto MAIN;	
 				break;
 			}
 			case 13:
 			{
-				system("cls");
-				XuatDSDiem_Lop(dslop,lmh);
-				goto MAIN;	
 				break;
 			}
 		}

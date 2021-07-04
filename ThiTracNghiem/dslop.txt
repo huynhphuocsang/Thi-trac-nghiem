@@ -1,0 +1,27 @@
+4
+D19CQCN02
+Cong nghe thong tin 2 khoa D19
+N19DCCN183
+Nguyen Thi Thanh
+Tuyen
+Nu
+N19DCCN183
+T
+10
+
+N19DCCN177
+Nguyen Thi Phuc
+Thi
+Nu
+N19DCCN177
+
+
+D19CQCN01
+Lop cong nghe thong tin 1
+
+D19CQCN03
+Cong nghe thong tin 3
+
+D19CQCN04
+Cong nghe thong tin 4
+
