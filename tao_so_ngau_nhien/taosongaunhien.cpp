@@ -34,7 +34,7 @@ void xuatfile(int a[],int n){
 	fo.open("so_ngau_nhien.txt",ios::out);
 	fo<<n<<endl;
 	for(int i=0;i<n;i++){
-		fo<<a[i]<<" ";
+		fo<<a[i]<<endl;
 	}
 	fo.close();
 	cout<<"Ghi file thanh cong!"<<endl;

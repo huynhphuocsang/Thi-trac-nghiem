@@ -6,35 +6,27 @@
 
 
 ð
-960
+1439
+T
+Hai duong thang song song la the nao
+la hai duong thang khong bao gio cat nhau
+la hai duong thang cat nhau tai mot diem
+la hai doan thang tao thanh goc vuong
+la hai doan thang bang nhau
+a
+1341
+T
+Tong cac so nguyen to nho hon 10
+4
+17
+7
+3
+b
+1199
 T
 Co bao nhieu so nguyen to nho hon 10
 3
+6
+2
 4
-5
-6
-b
-500
-T
-Tong 4 so tu nhien dau tien la bao nhieu: 
-3
-8
-6
-9
-c
-239
-H
-Kim loai deo nhat the gioi la gi
-bac
-vang
-niken
-chi
-b
-8
-T
-Nam 2021 thuoc the ki nao
-XX
-XIX
-XXI
-XVIII
-C
+d

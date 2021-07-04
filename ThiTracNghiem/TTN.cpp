@@ -1730,7 +1730,7 @@ int RANDOM()
 	fileout << n << endl;
 	for (int i = 0; i < n; i++)
 	{
-		fileout << A[i] << " ";
+		fileout << A[i] <<endl;
 	}
 	fileout.close();
 	return m;
